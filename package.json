@@ -1,0 +1,11 @@
+{
+  "name": "websocketserver",
+  "version": "1.0.0",
+  "description": "Websocket server",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Vladimir Cherepanov",
+  "license": "MIT"
+}
