@@ -1,4 +1,4 @@
-import { users } from "../users.js";
+import { users } from "../data/users.js";
 
 const createUser = (name, password) => {
     users.push({ name, password });
