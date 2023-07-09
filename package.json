@@ -7,17 +7,18 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "lint": "eslint --fix --ext .js,.jsx .",
     "test": "test"
   },
   "author": "Vladimir Cherepanov",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^8.44.0",
     "nodemon": "^2.0.22"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
-    "eslint": "^8.44.0",
     "ws": "^8.13.0"
   }
 }

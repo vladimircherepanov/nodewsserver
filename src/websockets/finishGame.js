@@ -2,12 +2,12 @@ import { games } from "../data/games.js";
 
 
 export const finishGame = (data) => {
-    const { gameId, indexPlayer} = data;
+    const { gameId, indexPlayer } = data;
     const game = games.find(game => game.gameId === gameId);
 
     const shootCheck = (ships) => {
             if(ships.filter(ship => ship.active === true).length === 0) {
-                console.log("FINISHHHHHH BLYA");
+                console.log("FINISHHHHHH");
                 return true;
             } else {
                 console.log("HERR WAM");

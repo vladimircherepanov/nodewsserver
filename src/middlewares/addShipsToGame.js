@@ -24,5 +24,5 @@ export const addShipsToGame = (parsedData) => {
     if((game.gameUsers.find(user => user.index === 1).ships.length + game.gameUsers.find(user => user.index === 2).ships.length) === 40) {
         //console.log("startGame!!!!");
         return {user1: game.gameUsers.find(user => user.index === 1).username, user2: game.gameUsers.find(user => user.index === 2).username }
-    };
+    }
 }
