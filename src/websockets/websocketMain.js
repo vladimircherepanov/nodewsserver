@@ -8,6 +8,7 @@ import {createGameId} from "../middlewares/createGameId.js";
 import { addShipsToGame } from "./addShipsToGame.js";
 import { games } from "../data/games.js";
 import { attackHandler } from "./attackHandler.js"
+import {finishGame} from "./finishGame.js";
 
 const connectedClients = [];
 
@@ -156,7 +157,7 @@ export const websocketMain = (ws) => {
                         JSON.stringify({
                             type: "attack",
                             data: JSON.stringify({
-                                position: JSON.stringify({ x: parsedData.x, y: parsedData.y}),
+                                position: { x: parsedData.x, y: parsedData.y},
                                 currentPlayer: parsedData.indexPlayer,
                                 status: "missed"
                             }),
@@ -167,7 +168,7 @@ export const websocketMain = (ws) => {
                         JSON.stringify({
                             type: "attack",
                             data: JSON.stringify({
-                                position: JSON.stringify({ x: parsedData.x, y: parsedData.y}),
+                                position: { x: parsedData.x, y: parsedData.y},
                                 currentPlayer: parsedData.indexPlayer,
                                 status: "missed"
                             }),
@@ -215,7 +216,7 @@ export const websocketMain = (ws) => {
                         JSON.stringify({
                             type: "attack",
                             data: JSON.stringify({
-                                position: JSON.stringify({ x: parsedData.x, y: parsedData.y}),
+                                position: { x: parsedData.x, y: parsedData.y },
                                 currentPlayer: parsedData.indexPlayer,
                                 status: "shot"
                             }),
@@ -226,7 +227,7 @@ export const websocketMain = (ws) => {
                         JSON.stringify({
                             type: "attack",
                             data: JSON.stringify({
-                                position: JSON.stringify({ x: parsedData.x, y: parsedData.y}),
+                                position: { x: parsedData.x, y: parsedData.y },
                                 currentPlayer: parsedData.indexPlayer,
                                 status: "shot"
                             }),
@@ -257,7 +258,7 @@ export const websocketMain = (ws) => {
                         JSON.stringify({
                             type: "attack",
                             data: JSON.stringify({
-                                position: JSON.stringify({ x: parsedData.x, y: parsedData.y}),
+                                position: { x: parsedData.x, y: parsedData.y },
                                 currentPlayer: parsedData.indexPlayer,
                                 status: "killed"
                             }),
@@ -268,20 +269,39 @@ export const websocketMain = (ws) => {
                         JSON.stringify({
                             type: "attack",
                             data: JSON.stringify({
-                                position: JSON.stringify({ x: parsedData.x, y: parsedData.y}),
+                                position: { x: parsedData.x, y: parsedData.y },
                                 currentPlayer: parsedData.indexPlayer,
                                 status: "killed"
                             }),
                             id: 0
                         })
                     );
+                    if(finishGame(parsedData)) {
+                        ws1.send(
+                            JSON.stringify({
+                                type: "finish",
+                                data: JSON.stringify({
+                                    winPlayer: parsedData.indexPlayer,
+                                }),
+                                id: 0
+                            })
+                        );
+                        ws2.send(
+                            JSON.stringify({
+                                type: "finish",
+                                data: JSON.stringify({
+                                    winPlayer: parsedData.indexPlayer,
+                                }),
+                                id: 0
+                            })
+                        );
+                    }
                 }}}
-
             }
             break;
 
             default: {
-                console.log("xxxxx")
+                console.log("wrong message type")
             }
 
         };
